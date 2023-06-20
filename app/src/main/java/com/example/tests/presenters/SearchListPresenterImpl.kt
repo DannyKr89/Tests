@@ -1,16 +1,16 @@
 package ru.dk.mydictionary.presenters
 
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import io.reactivex.rxjava3.disposables.CompositeDisposable
-import io.reactivex.rxjava3.kotlin.subscribeBy
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import ru.dk.mydictionary.data.SearchListRepo
+import ru.dk.mydictionary.data.model.DictionaryModel
 import ru.dk.mydictionary.data.state.AppState
 import ru.dk.mydictionary.ui.list.SearchListView
 
 class SearchListPresenterImpl(private val repository: SearchListRepo) : SearchListPresenter {
 
-    private var currentView: SearchListView? = null
-    private val compositeDisposable = CompositeDisposable()
+    override var currentView: SearchListView? = null
 
     override fun attach(searchView: SearchListView) {
         currentView = searchView
@@ -18,20 +18,25 @@ class SearchListPresenterImpl(private val repository: SearchListRepo) : SearchLi
 
     override fun detach() {
         currentView = null
-        compositeDisposable.clear()
     }
 
     override fun requestData(word: String) {
-        compositeDisposable.add(
-            repository.getData(word).observeOn(AndroidSchedulers.mainThread())
-                .doOnSubscribe { currentView?.renderData(AppState.Loading) }
-                .subscribeBy(
-                    onError = {
-                        currentView?.renderData(AppState.Error(it))
-                    },
-                    onSuccess = {
-                        currentView?.renderData(AppState.Success(it))
-                    }
-                ))
+        currentView?.renderData(AppState.Loading)
+        repository.getData(word)?.enqueue(object : Callback<List<DictionaryModel>> {
+            override fun onResponse(
+                call: Call<List<DictionaryModel>>,
+                response: Response<List<DictionaryModel>>
+            ) {
+                if (response.isSuccessful && (response.body() != null)) {
+                    currentView?.renderData(AppState.Success(response.body()))
+                } else {
+                    currentView?.renderData(AppState.Error(Throwable("error")))
+                }
+            }
+
+            override fun onFailure(call: Call<List<DictionaryModel>>, t: Throwable) {
+                currentView?.renderData(AppState.Error(t))
+            }
+        })
     }
 }
