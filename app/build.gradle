@@ -17,6 +17,19 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    flavorDimensions "default"
+    productFlavors {
+        fake {
+            applicationIdSuffix ".fake"
+            versionNameSuffix "-fake"
+        }
+        real {
+            applicationIdSuffix ".real"
+            versionNameSuffix "-real"
+        }
+    }
+
+
     buildTypes {
         release {
             minifyEnabled false
@@ -66,6 +79,7 @@ dependencies {
     testImplementation 'androidx.test.espresso:espresso-core:3.5.1'
     testImplementation 'androidx.test.espresso:espresso-intents:3.5.1'
 
+    debugImplementation 'androidx.fragment:fragment-testing:1.6.0'
     implementation 'androidx.core:core-ktx:1.8.0'
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.5.0'

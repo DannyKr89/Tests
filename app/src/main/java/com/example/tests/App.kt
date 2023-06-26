@@ -1,10 +1,10 @@
 package com.example.tests
 
 import android.app.Application
+import com.example.tests.data.SearchListRepoImpl
+import com.example.tests.presenters.SearchListPresenterImpl
 import ru.dk.mydictionary.data.SearchListRepo
-import ru.dk.mydictionary.data.SearchListRepoImpl
 import ru.dk.mydictionary.presenters.SearchListPresenter
-import ru.dk.mydictionary.presenters.SearchListPresenterImpl
 
 class App : Application() {
 

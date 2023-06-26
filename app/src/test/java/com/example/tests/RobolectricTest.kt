@@ -1,7 +1,9 @@
 package com.example.tests
 
 import android.os.Build
+import android.os.Bundle
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.testing.launchFragmentInContainer
 import androidx.test.core.app.ActivityScenario
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import org.junit.After
@@ -45,6 +47,17 @@ class RobolectricTest {
                 .add(R.id.main_container, fragment)
                 .commitNow()
             assertNotNull(fragment)
+        }
+    }
+
+    @Test
+    fun test() {
+        val fragment = launchFragmentInContainer<SearchListFragment>(
+            Bundle(),
+            R.style.Theme_Tests
+        )
+        fragment.onFragment {
+            assertNotNull(it)
         }
     }
 }
