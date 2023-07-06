@@ -1,5 +1,6 @@
 package com.example.tests
 
+import com.example.tests.presenters.SearchListPresenterImpl
 import junit.framework.TestCase.assertEquals
 import junit.framework.TestCase.assertFalse
 import junit.framework.TestCase.assertNull
@@ -14,7 +15,6 @@ import ru.dk.mydictionary.data.SearchListRepo
 import ru.dk.mydictionary.data.model.DictionaryModel
 import ru.dk.mydictionary.data.state.AppState
 import ru.dk.mydictionary.presenters.SearchListPresenter
-import ru.dk.mydictionary.presenters.SearchListPresenterImpl
 import ru.dk.mydictionary.ui.list.SearchListView
 
 class MockitoTest {

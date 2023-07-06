@@ -1,9 +1,10 @@
-package ru.dk.mydictionary.data
+package com.example.tests.data
 
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
+import ru.dk.mydictionary.data.SearchListRepo
 import ru.dk.mydictionary.data.model.DictionaryModel
 import ru.dk.mydictionary.data.retrofit.SearchListApi
 

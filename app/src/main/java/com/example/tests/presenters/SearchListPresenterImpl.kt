@@ -1,4 +1,4 @@
-package ru.dk.mydictionary.presenters
+package com.example.tests.presenters
 
 import retrofit2.Call
 import retrofit2.Callback
@@ -6,6 +6,7 @@ import retrofit2.Response
 import ru.dk.mydictionary.data.SearchListRepo
 import ru.dk.mydictionary.data.model.DictionaryModel
 import ru.dk.mydictionary.data.state.AppState
+import ru.dk.mydictionary.presenters.SearchListPresenter
 import ru.dk.mydictionary.ui.list.SearchListView
 
 class SearchListPresenterImpl(private val repository: SearchListRepo) : SearchListPresenter {
