@@ -1,20 +1,11 @@
 package com.example.tests.data
 
-import retrofit2.Call
-import retrofit2.Retrofit
-import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
-import retrofit2.converter.gson.GsonConverterFactory
+import com.example.tests.data.retrofit.SearchListApi
+import kotlinx.coroutines.flow.Flow
 import ru.dk.mydictionary.data.SearchListRepo
 import ru.dk.mydictionary.data.model.DictionaryModel
-import ru.dk.mydictionary.data.retrofit.SearchListApi
 
-class SearchListRepoImpl : SearchListRepo {
-    private val retrofit = Retrofit.Builder()
-        .baseUrl("https://dictionary.skyeng.ru/")
-        .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
-        .addConverterFactory(GsonConverterFactory.create())
-        .build()
-    private val api = retrofit.create(SearchListApi::class.java)
+class SearchListRepoImpl(private val api: SearchListApi) : SearchListRepo {
 
-    override fun getData(word: String): Call<List<DictionaryModel>>? = api.getList(word)
+    override suspend fun getData(word: String): Flow<List<DictionaryModel>>? = api.getList(word)
 }

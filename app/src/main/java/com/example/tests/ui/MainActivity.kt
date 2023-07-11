@@ -3,7 +3,7 @@ package com.example.tests.ui
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.tests.databinding.ActivityMainBinding
-import ru.dk.mydictionary.ui.list.SearchListFragment
+import com.example.tests.ui.list.SearchListFragment
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
