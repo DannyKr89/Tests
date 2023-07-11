@@ -1,4 +1,4 @@
-package ru.dk.mydictionary.ui.list
+package com.example.tests.ui.list
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,9 +9,10 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.tests.App
 import com.example.tests.databinding.FragmentSearchBinding
+import com.example.tests.ui.viewmodels.SearchListViewModel
 import ru.dk.mydictionary.data.state.AppState
-import ru.dk.mydictionary.presenters.SearchListPresenter
 import ru.dk.mydictionary.ui.adapters.SearchListAdapter
+import ru.dk.mydictionary.ui.list.SearchListView
 import ru.dk.mydictionary.ui.search.SearchDialogFragment
 
 class SearchListFragment : Fragment(), SearchListView {
@@ -19,7 +20,7 @@ class SearchListFragment : Fragment(), SearchListView {
     private var _binding: FragmentSearchBinding? = null
     private val binding get() = _binding!!
     private var adapter = SearchListAdapter()
-    lateinit var presenter: SearchListPresenter
+    private val viewModel: SearchListViewModel = App.instance.viewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,12 +32,10 @@ class SearchListFragment : Fragment(), SearchListView {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        presenter = App.instance.presenter
-        presenter.attach(this)
-
+        viewModel.getLiveData().observe(viewLifecycleOwner) {
+            renderData(it)
+        }
         initViews()
-
-
     }
 
     private fun initViews() {
@@ -47,7 +46,7 @@ class SearchListFragment : Fragment(), SearchListView {
             searchFab.setOnClickListener {
                 SearchDialogFragment.newInstance().apply {
                     listener = {
-                        presenter.requestData(it)
+                        viewModel.requestData(it)
                     }
                 }.show(parentFragmentManager, "search")
             }

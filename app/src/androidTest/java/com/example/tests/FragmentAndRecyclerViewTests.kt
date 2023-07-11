@@ -12,12 +12,12 @@ import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.example.tests.ui.list.SearchListFragment
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import ru.dk.mydictionary.ui.adapters.SearchListAdapter
-import ru.dk.mydictionary.ui.list.SearchListFragment
 
 @RunWith(AndroidJUnit4::class)
 class FragmentAndRecyclerViewTests {
