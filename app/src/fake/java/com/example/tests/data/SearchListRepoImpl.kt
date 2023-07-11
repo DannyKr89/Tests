@@ -12,14 +12,23 @@ import ru.dk.mydictionary.data.model.Translation
 
 class SearchListRepoImpl : SearchListRepo {
 
+    private val list = mutableListOf<DictionaryModel>()
+
     val response: Response<List<DictionaryModel>> = Response.success(
-        listOf(
-            DictionaryModel(
-                listOf(Meaning("", "", "", Translation("test"))),
-                "test"
-            )
-        )
+        getFakeList()
     )
+
+    private fun getFakeList(): List<DictionaryModel> {
+        for (i in 1..20) {
+            list.add(
+                DictionaryModel(
+                    listOf(Meaning("", "", "", Translation("тест $i"))),
+                    "test $i"
+                )
+            )
+        }
+        return list
+    }
 
 
     override fun getData(word: String): Call<List<DictionaryModel>> {

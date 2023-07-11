@@ -2,6 +2,7 @@ package ru.dk.mydictionary.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tests.databinding.SearchItemBinding
@@ -16,6 +17,13 @@ class SearchListAdapter :
             with(binding) {
                 titleSearchItem.text = dictionaryModel.text
                 descriptionSearchItem.text = dictionaryModel.meanings?.first()?.translation?.text
+                root.setOnClickListener {
+                    Toast.makeText(
+                        root.context,
+                        "${dictionaryModel.text}\n${dictionaryModel.meanings?.first()?.translation?.text}",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
             }
         }
     }

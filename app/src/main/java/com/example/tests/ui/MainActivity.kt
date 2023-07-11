@@ -1,4 +1,4 @@
-package ru.dk.mydictionary.ui
+package com.example.tests.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

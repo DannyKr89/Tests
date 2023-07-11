@@ -16,10 +16,10 @@ import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.isRoot
 import androidx.test.espresso.matcher.ViewMatchers.withEffectiveVisibility
 import androidx.test.espresso.matcher.ViewMatchers.withId
+import com.example.tests.ui.MainActivity
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
-import ru.dk.mydictionary.ui.MainActivity
 
 
 const val TEST_WORD = "String"
